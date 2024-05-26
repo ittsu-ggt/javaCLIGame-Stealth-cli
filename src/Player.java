@@ -20,27 +20,28 @@ public class Player extends CObject {
         if (key.isKeyPressed('w')) {
             vx = 0;
             vy = -1;
-            // SwitchCostume("Up");
+            SwitchCostume("Up");
         }
         if (key.isKeyPressed('s')) {
             vx = 0;
             vy = 1;
-            // SwitchCostume("Down");
+            SwitchCostume("Down");
         }
         if (key.isKeyPressed('a')) {
             vx = -1;
             vy = 0;
-            // SwitchCostume("Left");
+            SwitchCostume("Left");
         }
         if (key.isKeyPressed('d')) {
             vx = 1;
             vy = 0;
-            // SwitchCostume("Right");
+            SwitchCostume("Right");
         }
         MoveLocation(vx, vy);
-
-        if(IsHit(master.map, '＃'))MoveLocation(-vx, -vy);
+        master.debug.AddLog("IsHit : "+IsHit(master.map, '＃',this.GetCostumeData().get(1).get(1).word)+" thisword : "+this.GetCostumeData().get(1).get(1).word);
+        if(IsHit(master.map, '＃',this.GetCostumeData().get(1).get(1).word))MoveLocation(-vx, -vy);
         master.map.UpdateLocation();
-        master.debug.AddLog("x:"+X+" y:"+Y+" mapX:"+master.view.getCameraX()+" mapY:"+master.view.getCameraY());
+        master.map.ChangeDrawingOrder(-1);
+
     }
 }
