@@ -4,3 +4,4 @@ src/consolegui/
 /bin/
 .VSCodeCounter/
 *.class
+Makefile

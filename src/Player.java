@@ -38,7 +38,7 @@ public class Player extends CObject {
             SwitchCostume("Right");
         }
         MoveLocation(vx, vy);
-        master.debug.AddLog("IsHit : "+IsHit(master.map, '＃',this.GetCostumeData().get(1).get(1).word)+" thisword : "+this.GetCostumeData().get(1).get(1).word);
+        // master.debug.AddLog("IsHit : "+IsHit(master.map, '＃',this.GetCostumeData().get(1).get(1).word)+" thisword : "+this.GetCostumeData().get(1).get(1).word);
         if(IsHit(master.map, '＃',this.GetCostumeData().get(1).get(1).word))MoveLocation(-vx, -vy);
         master.map.UpdateLocation();
         master.map.ChangeDrawingOrder(-1);
