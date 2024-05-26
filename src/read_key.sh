@@ -2,11 +2,11 @@
 # http://www.drdobbs.com/shell-corner-reading-function-and-cursor/199102881
 
 ## Define useful variables
-# stty -echo
-# trap 'stty echo; exit' SIGINT
-# trap 'stty echo; exit' EXIT
-# trap 'stty echo; exit' SIGHUP
-# trap 'stty echo; exit' SIGTERM
+stty -echo
+trap 'stty echo; exit' SIGINT
+trap 'stty echo; exit' EXIT
+trap 'stty echo; exit' SIGHUP
+trap 'stty echo; exit' SIGTERM
 # trap 'stty echo; exit' SIGKILL
 # trap 'stty echo; exit' SIGSTOP
 
