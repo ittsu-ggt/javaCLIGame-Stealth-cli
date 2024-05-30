@@ -6,6 +6,10 @@ import master.*;
 public class Map extends CObject {
     private GameScene master;
 
+    /**
+     * マップのコンストラクター
+     * @param master シーンの管理モジュール
+     */
     public Map(GameScene master) {
         super(master.master.view, "map",
                 SpriteBuildService.BuildModel("./data/costume/map/map.txt", 

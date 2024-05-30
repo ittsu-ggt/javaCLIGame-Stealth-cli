@@ -10,18 +10,42 @@ public class Enemy extends CObject {
     // 1:上 2:右 3:下 4:左
     int mydirection = 1;
 
+    int threshold1;
+    int threshold2;
+
     private class Enemysensor {
         CObject front;
         CObject right;
         CObject left;
     }
-
+    /**
+     * 敵のコンストラクター
+     * @param manager シーンの管理モジュール
+     * @param x x座標
+     * @param y y座標
+     * @param isvisible 表示するかどうか
+     */
     public Enemy(GameScene manager, int x, int y, boolean isvisible) {
+        this(manager, x, y, isvisible, 15, 100);
+    }
+
+    /**
+     * 敵のコンストラクター
+     * @param manager シーンの管理モジュール
+     * @param x x座標
+     * @param y y座標
+     * @param isvisible 表示するかどうか
+     * @param threshold1 前にすすめるとき、可能な場合に左右に曲がる確率のしきい値。小さいほど曲がりやすくなる
+     * @param threshold2 後ろを向く確率のしきい値。小さいほど後ろを向きやすくなる
+     */
+    public Enemy(GameScene manager, int x, int y, boolean isvisible, int threshold1, int threshold2) {
         super(manager.master.view, "def",
                 SpriteBuildService.BuildModel("./data/costume/enemy/def.txt", CColor.BLACK,
                         CColor.DEFAULT),
                 x, y,
                 isvisible);
+        this.threshold1 = threshold1;
+        this.threshold2 = threshold2;
         AddCostume("Left",
                 SpriteBuildService.BuildModel("./data/costume/enemy/left.txt", CColor.BLACK,
                         CColor.DEFAULT));
@@ -117,6 +141,9 @@ public class Enemy extends CObject {
 
     }
 
+    /**
+     * 敵を１コマ分動かす
+     */
     public void Update() {
         setSensor();
         boolean canMoveFront = !(sensor.front.IsHit(manager.map, '＃','　') ||sensor.front.IsHit(manager.map, '＠','　'));
@@ -124,12 +151,12 @@ public class Enemy extends CObject {
         boolean canTrunLeft = !(sensor.left.IsHit(manager.map, '＃','　') || sensor.left.IsHit(manager.map, '＠','　'));
         Random rand = new Random();
 
-        if (rand.nextInt(100) == 0) { // 確率で後ろに向く
+        if (rand.nextInt(threshold2) == 0) { // 確率で後ろに向く
             TurnRight();
             TurnRight();
         }
         if (canMoveFront) { // 前に進めるなら
-            if ((canTrunRight || canTrunLeft) && rand.nextInt(15) == 0) { // 左右に曲がれるかを判定
+            if ((canTrunRight || canTrunLeft) && rand.nextInt(threshold1) == 0) { // 左右に曲がれるかを判定
                 if (rand.nextBoolean() && canTrunRight) { // 確率で右に曲がる
                     TurnRight();
                 } else if (canTrunLeft) { // 確立に負けたら左

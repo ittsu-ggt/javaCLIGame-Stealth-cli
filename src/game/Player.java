@@ -7,6 +7,13 @@ public class Player extends CObject {
     KeyBoardService key;
     GameScene manager;
 
+    /**
+     * プレイヤーのコンストラクター
+     * @param manager シーンの管理モジュール
+     * @param x x座標
+     * @param y y座標
+     * @param isvisible 表示するかどうか
+     */
     public Player(GameScene manager, int x, int y, boolean isvisible) {
         super(manager.master.view, "def",
                 SpriteBuildService.BuildModel("./data/costume/player/def.txt", CColor.BLACK, CColor.DEFAULT), x, y,
@@ -24,6 +31,9 @@ public class Player extends CObject {
         this.manager = manager;
     }
 
+    /**
+     * プレイヤーの更新処理
+     */
     public void Update() {
         int vx = 0, vy = 0;
         if (key.isKeyPressed('w')) {
