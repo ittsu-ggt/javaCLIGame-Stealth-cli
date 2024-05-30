@@ -21,7 +21,7 @@ fg_replacement_table = {
 }
 bg_replacement_table = {
     '　': '8',
-    'Ｒ': '5',
+    'Ｒ': '7',
     '＠': '8',
     '＃': '1',
     # Add more replacement rules as needed
