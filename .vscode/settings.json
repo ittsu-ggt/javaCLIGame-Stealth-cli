@@ -1,4 +1,10 @@
 {
+    "files.exclude": {
+        "**/src/**/*.class": true
+    },
+    "java.test.config": {
+        "workingDirectory": "${workspaceFolder}/src/"
+    },
     "java.project.sourcePaths": ["src","test"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
