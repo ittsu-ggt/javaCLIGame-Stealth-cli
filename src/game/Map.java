@@ -8,7 +8,10 @@ public class Map extends CObject {
 
     public Map(GameScene master) {
         super(master.master.view, "map",
-                SpriteBuildService.BuildModel("./data/costume/map/map.txt", CColor.BLACK, CColor.BLACK), 0, 0, false);
+                SpriteBuildService.BuildModel("./data/costume/map/map.txt", 
+                        "./data/costume/map/mapfgcolor.txt",
+                        "./data/costume/map/mapbgcolor.txt"),
+                        0, 0, false);
         this.master = master;
     }
 }
