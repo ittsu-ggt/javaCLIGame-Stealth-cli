@@ -66,7 +66,6 @@ public class Player extends CObject {
         if (manager.player.Y > manager.map.GetCostumeData().size() - manager.master.view.getHeight() / 2)
             y = manager.map.GetCostumeData().size() - manager.master.view.getHeight();
         manager.master.view.SetLocation(x, y);
-        manager.map.ChangeDrawingOrder(-1);
 
     }
 }
