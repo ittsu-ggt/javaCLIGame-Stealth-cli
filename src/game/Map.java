@@ -8,14 +8,15 @@ public class Map extends CObject {
 
     /**
      * マップのコンストラクター
+     * 
      * @param master シーンの管理モジュール
      */
     public Map(GameScene master) {
         super(master.master.view, "map",
-                SpriteBuildService.BuildModel("./data/costume/map/map.txt", 
+                SpriteBuildService.BuildModel("./data/costume/map/map.txt",
                         "./data/costume/map/mapfgcolor.txt",
                         "./data/costume/map/mapbgcolor.txt"),
-                        0, 0, false);
+                0, 0, false);
         this.master = master;
     }
 }

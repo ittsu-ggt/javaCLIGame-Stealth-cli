@@ -12,13 +12,13 @@ public class GameScene {
     Map map;
     ArrayList<Enemy> enemies;
     StatusLog statuslog;
-    int hp=3;
+    int hp = 3;
     String time;
-
 
     /**
      * ゲームの管理モジュール
-     * @param master アプリケーションの管理モジュール 
+     * 
+     * @param master アプリケーションの管理モジュール
      * @throws InterruptedException
      * @throws IOException
      */
@@ -44,6 +44,7 @@ public class GameScene {
 
     /**
      * シーンの実行
+     * 
      * @throws InterruptedException
      * @throws IOException
      */
@@ -57,13 +58,12 @@ public class GameScene {
                 enemy.Update();
             }
 
-
             map.ChangeDrawingOrder(0);
             var now = new Timestamp(System.currentTimeMillis());
             time = sdf.format(now.getTime() - gamestart.getTime());
-            statuslog.refresh(hp,time);
+            statuslog.refresh(hp, time);
             master.view.Update();
-            
+
             Thread.sleep(100);
         }
     }

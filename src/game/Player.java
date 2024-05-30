@@ -9,9 +9,10 @@ public class Player extends CObject {
 
     /**
      * プレイヤーのコンストラクター
-     * @param manager シーンの管理モジュール
-     * @param x x座標
-     * @param y y座標
+     * 
+     * @param manager   シーンの管理モジュール
+     * @param x         x座標
+     * @param y         y座標
      * @param isvisible 表示するかどうか
      */
     public Player(GameScene manager, int x, int y, boolean isvisible) {
