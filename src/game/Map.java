@@ -16,7 +16,7 @@ public class Map extends CObject {
                 SpriteBuildService.BuildModel("./data/costume/map/map.txt",
                         "./data/costume/map/mapfgcolor.txt",
                         "./data/costume/map/mapbgcolor.txt"),
-                0, 0, false);
+                0, 0, true);
         this.master = master;
     }
 }
