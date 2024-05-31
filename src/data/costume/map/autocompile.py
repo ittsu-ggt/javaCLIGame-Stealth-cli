@@ -17,14 +17,12 @@ fg_replacement_table = {
     'Ｒ': '8',
     '＠': '8',
     '＃': '1',
-    # Add more replacement rules as needed
 }
 bg_replacement_table = {
     '　': '8',
     'Ｒ': '7',
     '＠': '8',
     '＃': '1',
-    # Add more replacement rules as needed
 }
 
 replace_text(input_file, fgcolor_file, fg_replacement_table)
