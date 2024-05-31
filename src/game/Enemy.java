@@ -43,22 +43,22 @@ public class Enemy extends CObject {
      */
     public Enemy(GameScene manager, int x, int y, boolean isvisible, int threshold1, int threshold2) {
         super(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/enemy/def.txt", CColor.BLACK,
+                SpriteBuildService.BuildModel("./data/costume/enemy/def.txt", CColor.RED,
                         CColor.DEFAULT),
                 x, y,
                 isvisible);
         this.threshold1 = threshold1;
         this.threshold2 = threshold2;
         AddCostume("Left",
-                SpriteBuildService.BuildModel("./data/costume/enemy/left.txt", CColor.BLACK,
+                SpriteBuildService.BuildModel("./data/costume/enemy/left.txt", CColor.RED,
                         CColor.DEFAULT));
         AddCostume("Right",
-                SpriteBuildService.BuildModel("./data/costume/enemy/right.txt", CColor.BLACK,
+                SpriteBuildService.BuildModel("./data/costume/enemy/right.txt", CColor.RED,
                         CColor.DEFAULT));
-        AddCostume("Up", SpriteBuildService.BuildModel("./data/costume/enemy/upper.txt", CColor.BLACK,
+        AddCostume("Up", SpriteBuildService.BuildModel("./data/costume/enemy/upper.txt", CColor.RED,
                 CColor.DEFAULT));
         AddCostume("Down",
-                SpriteBuildService.BuildModel("./data/costume/enemy/lower.txt", CColor.BLACK,
+                SpriteBuildService.BuildModel("./data/costume/enemy/lower.txt", CColor.RED,
                         CColor.DEFAULT));
         SwitchCostume("def");
         sensor = new Enemysensor();

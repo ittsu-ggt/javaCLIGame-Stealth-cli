@@ -17,16 +17,16 @@ public class Player extends CObject {
      */
     public Player(GameScene manager, int x, int y, boolean isvisible) {
         super(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/player/def.txt", CColor.BLACK, CColor.DEFAULT), x, y,
+                SpriteBuildService.BuildModel("./data/costume/player/def.txt", CColor.GREEN, CColor.DEFAULT), x, y,
                 isvisible);
         AddCostume("Left",
-                SpriteBuildService.BuildModel("./data/costume/player/left.txt", CColor.BLACK, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("./data/costume/player/left.txt", CColor.GREEN, CColor.DEFAULT));
         AddCostume("Right",
-                SpriteBuildService.BuildModel("./data/costume/player/right.txt", CColor.BLACK, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("./data/costume/player/right.txt", CColor.GREEN, CColor.DEFAULT));
         AddCostume("Up",
-                SpriteBuildService.BuildModel("./data/costume/player/upper.txt", CColor.BLACK, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("./data/costume/player/upper.txt", CColor.GREEN, CColor.DEFAULT));
         AddCostume("Down",
-                SpriteBuildService.BuildModel("./data/costume/player/lower.txt", CColor.BLACK, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("./data/costume/player/lower.txt", CColor.GREEN, CColor.DEFAULT));
         SwitchCostume("def");
         this.key = manager.master.key;
         this.manager = manager;
@@ -63,8 +63,10 @@ public class Player extends CObject {
         // "+this.GetCostumeData().get(1).get(1).word);
         if (IsHit(manager.map, '＃', this.GetCostumeData().get(1).get(1).word) ||
                 IsHit(manager.map, '｜', this.GetCostumeData().get(1).get(1).word) ||
-                IsHit(manager.map, '＿', this.GetCostumeData().get(1).get(1).word))
+                IsHit(manager.map, '＿', this.GetCostumeData().get(1).get(1).word)) {
             MoveLocation(-vx, -vy);
+            SwitchCostume("def");
+        }
 
         int x = manager.player.X - manager.master.view.getWidth() / 2;
         if (manager.player.X < manager.master.view.getWidth() / 2)

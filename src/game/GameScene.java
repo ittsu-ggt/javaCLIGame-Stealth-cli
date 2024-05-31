@@ -35,7 +35,7 @@ public class GameScene {
         this.enemies.add(new Enemy(this, 34, 96, true));
         this.enemies.add(new Enemy(this, 81, 53, true));
         this.enemies.add(new Enemy(this, 104, 15, true));
-        this.enemies.add(new Enemy(this, 133, 26, true));
+        this.enemies.add(new Enemy(this, 135, 26, true));
         this.enemies.add(new Enemy(this, 121, 52, true));
         this.enemies.add(new Enemy(this, 109, 72, true));
         this.enemies.add(new Enemy(this, 109, 95, true));
