@@ -58,9 +58,7 @@ public class Player extends CObject {
             SwitchCostume("Right");
         }
         MoveLocation(vx, vy);
-        // master.debug.AddLog("IsHit : "+IsHit(master.map,
-        // '＃',this.GetCostumeData().get(1).get(1).word)+" thisword :
-        // "+this.GetCostumeData().get(1).get(1).word);
+        manager.master.debug.AddLog("X:" + X + " Y:" + Y);
         if (IsHit(manager.map, '＃', this.GetCostumeData().get(1).get(1).word) ||
                 IsHit(manager.map, '｜', this.GetCostumeData().get(1).get(1).word) ||
                 IsHit(manager.map, '＿', this.GetCostumeData().get(1).get(1).word)) {
