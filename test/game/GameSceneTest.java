@@ -15,13 +15,7 @@ import consolegui.CDisplay;
 import consolegui.KeyBoardService;
 
 public class GameSceneTest {
-    public Game Testmaster = new Game(){
-        {
-        this.view = new CDisplay(100,50,1,8,true,true);
-        this.key= new KeyBoardService(true);
-        this.debug = new CDebug(this.view,0,0,10);
-        }
-    };
+    public static Game Testmaster = new Game();
 
 
     @Test
