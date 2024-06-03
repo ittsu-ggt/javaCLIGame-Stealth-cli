@@ -13,6 +13,10 @@ public class Enemy extends CObject {
     int threshold1;
     int threshold2;
 
+    boolean debugstatus = false;
+
+    boolean debugisruninng = true;
+
     private class Enemysensor {
         CObject front;
         CObject right;
@@ -27,8 +31,8 @@ public class Enemy extends CObject {
      * @param y         y座標
      * @param isvisible 表示するかどうか
      */
-    public Enemy(GameScene manager, int x, int y, boolean isvisible) {
-        this(manager, x, y, isvisible, 15, 100);
+    public Enemy(GameScene manager, int x, int y, boolean isvisible,boolean debugstatus) {
+        this(manager, x, y, 15, 100,isvisible, debugstatus);
     }
 
     /**
@@ -41,7 +45,7 @@ public class Enemy extends CObject {
      * @param threshold1 前にすすめるとき、可能な場合に左右に曲がる確率のしきい値。小さいほど曲がりやすくなる
      * @param threshold2 後ろを向く確率のしきい値。小さいほど後ろを向きやすくなる
      */
-    public Enemy(GameScene manager, int x, int y, boolean isvisible, int threshold1, int threshold2) {
+    public Enemy(GameScene manager, int x, int y, int threshold1, int threshold2, boolean isvisible, boolean debugstatus) {
         super(manager.master.view, "def",
                 SpriteBuildService.BuildModel("./data/costume/enemy/def.txt", CColor.RED,
                         CColor.DEFAULT),
@@ -64,22 +68,29 @@ public class Enemy extends CObject {
         sensor = new Enemysensor();
         sensor.front = new CObject(manager.master.view, "length",
                 SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront.txt", CColor.DEFAULT,
-                        CColor.DEFAULT),
+                        CColor.RED),
                 this.X, this.Y, isvisible);
-        sensor.right = new CObject(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorside.txt", CColor.DEFAULT,
-                        CColor.DEFAULT),
+        sensor.right = new CObject(manager.master.view, "length",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront2.txt", CColor.DEFAULT,
+                        CColor.RED),
                 this.X, y, isvisible);
-        sensor.left = new CObject(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorside.txt", CColor.DEFAULT,
-                        CColor.DEFAULT),
+        sensor.left = new CObject(manager.master.view, "length",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront2.txt", CColor.DEFAULT,
+                        CColor.RED),
                 this.X, y, isvisible);
 
         sensor.front.AddCostume("vertical",
                 SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront2.txt", CColor.DEFAULT,
-                        CColor.DEFAULT));
+                CColor.RED));
+        sensor.right.AddCostume("vertical",
+        SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront.txt", CColor.DEFAULT,
+                CColor.RED));
+        sensor.left.AddCostume("vertical",
+        SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront.txt", CColor.DEFAULT,
+                CColor.RED));
 
         this.manager = manager;
+        this.debugstatus = debugstatus;
     }
 
     private void TurnRight() {
@@ -98,25 +109,35 @@ public class Enemy extends CObject {
 
     private void setSensor() {
         if (mydirection == 1) {
-            sensor.front.SetLocation(this.X, this.Y - 2);
+            sensor.front.SetLocation(this.X, this.Y - 1);
             sensor.right.SetLocation(this.X + 2, this.Y);
             sensor.left.SetLocation(this.X - 1, this.Y);
             sensor.front.SwitchCostume("length");
+            sensor.left.SwitchCostume("length");
+            sensor.right.SwitchCostume("length");
         } else if (mydirection == 2) {
-            sensor.front.SetLocation(this.X + 3, this.Y);
-            sensor.right.SetLocation(this.X + 1, this.Y + 2);
-            sensor.left.SetLocation(this.X + 1, this.Y - 1);
+            sensor.front.SetLocation(this.X + 2, this.Y);
+            sensor.right.SetLocation(this.X, this.Y + 2);
+            sensor.left.SetLocation(this.X , this.Y - 1);
             sensor.front.SwitchCostume("vertical");
+            sensor.left.SwitchCostume("vertical");
+            sensor.right.SwitchCostume("vertical");
+
         } else if (mydirection == 3) {
-            sensor.front.SetLocation(this.X, this.Y + 3);
-            sensor.right.SetLocation(this.X - 1, this.Y + 1);
-            sensor.left.SetLocation(this.X + 2, this.Y + 1);
+            sensor.front.SetLocation(this.X, this.Y + 2);
+            sensor.right.SetLocation(this.X - 1, this.Y );
+            sensor.left.SetLocation(this.X + 2, this.Y );
             sensor.front.SwitchCostume("length");
+            sensor.left.SwitchCostume("length");
+            sensor.right.SwitchCostume("length");
+
         } else if (mydirection == 4) {
-            sensor.front.SetLocation(this.X - 2, this.Y);
+            sensor.front.SetLocation(this.X - 1, this.Y);
             sensor.right.SetLocation(this.X, this.Y - 1);
             sensor.left.SetLocation(this.X, this.Y + 2);
             sensor.front.SwitchCostume("vertical");
+            sensor.left.SwitchCostume("vertical");
+            sensor.right.SwitchCostume("vertical");
         } else {
             throw new IllegalArgumentException(this.getClass().getName() + "mydirectionが不正です．");
         }
@@ -126,6 +147,7 @@ public class Enemy extends CObject {
     }
 
     private void goAhead() {
+
         if (mydirection == 1) {
             MoveLocation(0, -1);
             SwitchCostume("Up");
@@ -141,6 +163,11 @@ public class Enemy extends CObject {
         } else {
             throw new IllegalArgumentException(this.getClass().getName() + "mydirectionが不正です．");
         }
+        if(IsHit(manager.map, '＃', 'Ｅ')){ // FIXME: デバッグ用のため削除
+            debugisruninng = false;
+            setSensor();
+            throw new IllegalArgumentException(this.getClass().getName() + "敵が壁に埋まっています．"+X+":"+Y);
+        }
 
     }
 
@@ -148,18 +175,23 @@ public class Enemy extends CObject {
      * 敵を１コマ分動かす
      */
     public void Update() {
-        setSensor();
-        boolean canMoveFront = !(sensor.front.IsHit(manager.map, '＃', '　')
-                || sensor.front.IsHit(manager.map, '＠', '　'));
-        boolean canTrunRight = !(sensor.right.IsHit(manager.map, '＃', '　')
-                || sensor.right.IsHit(manager.map, '＠', '　'));
-        boolean canTrunLeft = !(sensor.left.IsHit(manager.map, '＃', '　') || sensor.left.IsHit(manager.map, '＠', '　'));
+        if(!debugisruninng)return;
         Random rand = new Random();
-
         if (rand.nextInt(threshold2) == 0) { // 確率で後ろに向く
             TurnRight();
             TurnRight();
         }
+        // StringService str = new StringService(manager.master.view, "*", X+1, Y+1, CColor.RED, CColor.DEFAULT, true); // FIXME: デバッグ用のため削除
+        setSensor();
+        boolean canMoveFront = !(sensor.front.IsHit(manager.map, '＃', sensor.front.GetCostumeData().get(0).get(0).word)
+                || sensor.front.IsHit(manager.map, '＠', sensor.front.GetCostumeData().get(0).get(0).word));
+        boolean canTrunRight = !(sensor.right.IsHit(manager.map, '＃', sensor.front.GetCostumeData().get(0).get(0).word)
+                || sensor.right.IsHit(manager.map, '＠', sensor.front.GetCostumeData().get(0).get(0).word));
+        boolean canTrunLeft = !(sensor.left.IsHit(manager.map, '＃', sensor.front.GetCostumeData().get(0).get(0).word)
+                     || sensor.left.IsHit(manager.map, '＠', sensor.front.GetCostumeData().get(0).get(0).word));
+
+
+
         if (canMoveFront) { // 前に進めるなら
             if ((canTrunRight || canTrunLeft) && rand.nextInt(threshold1) == 0) { // 左右に曲がれるかを判定
                 if (rand.nextBoolean() && canTrunRight) { // 確率で右に曲がる
@@ -187,7 +219,8 @@ public class Enemy extends CObject {
             }
         }
         goAhead();
-
+        setSensor();
+        if(debugstatus)manager.master.debug.AddLog("X:" + X + " Y:" + Y);
     }
 
 }
