@@ -16,7 +16,7 @@ public class Game {
     public Game() {
         this.view = new CDisplay(100, 50, 1, 8, true, true);
         this.key = new KeyBoardService(true);
-        this.debug = new CDebug(this.view, 0, 0, 10);
+        this.debug = new CDebug(this.view, 0, 0, 1);
     }
 
     /**
