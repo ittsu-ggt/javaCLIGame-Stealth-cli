@@ -14,13 +14,14 @@ public class Enemy extends CObject {
     int threshold2;
 
     boolean debugstatus = false;
-
     boolean debugisruninng = true;
+    boolean isPlay = true;
 
     private class Enemysensor {
-        CObject front;
-        CObject right;
-        CObject left;
+        CObject wallFront;
+        CObject wallRight;
+        CObject wallLeft;
+        CObject playerFront;
     }
 
     /**
@@ -53,10 +54,10 @@ public class Enemy extends CObject {
                 isvisible);
         this.threshold1 = threshold1;
         this.threshold2 = threshold2;
-        AddCostume("Left",
+        AddCostume("wallLeft",
                 SpriteBuildService.BuildModel("./data/costume/enemy/left.txt", CColor.RED,
                         CColor.DEFAULT));
-        AddCostume("Right",
+        AddCostume("wallRight",
                 SpriteBuildService.BuildModel("./data/costume/enemy/right.txt", CColor.RED,
                         CColor.DEFAULT));
         AddCostume("Up", SpriteBuildService.BuildModel("./data/costume/enemy/upper.txt", CColor.RED,
@@ -66,28 +67,35 @@ public class Enemy extends CObject {
                         CColor.DEFAULT));
         SwitchCostume("def");
         sensor = new Enemysensor();
-        sensor.front = new CObject(manager.master.view, "length",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront.txt", CColor.DEFAULT,
+        sensor.wallFront = new CObject(manager.master.view, "length",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
                         CColor.RED),
                 this.X, this.Y, isvisible);
-        sensor.right = new CObject(manager.master.view, "length",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront2.txt", CColor.DEFAULT,
+        sensor.wallRight = new CObject(manager.master.view, "length",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
                         CColor.RED),
                 this.X, y, isvisible);
-        sensor.left = new CObject(manager.master.view, "length",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront2.txt", CColor.DEFAULT,
+        sensor.wallLeft = new CObject(manager.master.view, "length",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
                         CColor.RED),
+                this.X, y, isvisible);
+        sensor.playerFront = new CObject(manager.master.view, "def",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorPlayer.txt", CColor.DEFAULT,
+                        CColor.DEFAULT),
                 this.X, y, isvisible);
 
-        sensor.front.AddCostume("vertical",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront2.txt", CColor.DEFAULT,
+        sensor.wallFront.AddCostume("vertical",
+                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
                 CColor.RED));
-        sensor.right.AddCostume("vertical",
-        SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront.txt", CColor.DEFAULT,
+        sensor.wallRight.AddCostume("vertical",
+        SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
                 CColor.RED));
-        sensor.left.AddCostume("vertical",
-        SpriteBuildService.BuildModel("./data/costume/enemy/sensorfront.txt", CColor.DEFAULT,
+        sensor.wallLeft.AddCostume("vertical",
+        SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
                 CColor.RED));
+        sensor.playerFront.AddCostume("light",
+        SpriteBuildService.BuildModel("./data/costume/enemy/sensorPlayer2.txt", CColor.YELLOW,
+                CColor.YELLOW));
 
         this.manager = manager;
         this.debugstatus = debugstatus;
@@ -108,58 +116,64 @@ public class Enemy extends CObject {
     }
 
     private void setSensor() {
+
         if (mydirection == 1) {
-            sensor.front.SetLocation(this.X, this.Y - 1);
-            sensor.right.SetLocation(this.X + 2, this.Y);
-            sensor.left.SetLocation(this.X - 1, this.Y);
-            sensor.front.SwitchCostume("length");
-            sensor.left.SwitchCostume("length");
-            sensor.right.SwitchCostume("length");
+            sensor.wallFront.SetLocation(this.X, this.Y - 1);
+            sensor.wallRight.SetLocation(this.X + 2, this.Y);
+            sensor.wallLeft.SetLocation(this.X - 1, this.Y);
+            sensor.playerFront.SetLocation(this.X, this.Y - 2);
+            sensor.wallFront.SwitchCostume("length");
+            sensor.wallLeft.SwitchCostume("length");
+            sensor.wallRight.SwitchCostume("length");
         } else if (mydirection == 2) {
-            sensor.front.SetLocation(this.X + 2, this.Y);
-            sensor.right.SetLocation(this.X, this.Y + 2);
-            sensor.left.SetLocation(this.X , this.Y - 1);
-            sensor.front.SwitchCostume("vertical");
-            sensor.left.SwitchCostume("vertical");
-            sensor.right.SwitchCostume("vertical");
+            sensor.wallFront.SetLocation(this.X + 2, this.Y);
+            sensor.wallRight.SetLocation(this.X, this.Y + 2);
+            sensor.wallLeft.SetLocation(this.X , this.Y - 1);
+            sensor.playerFront.SetLocation(this.X + 2, this.Y);
+            sensor.wallFront.SwitchCostume("vertical");
+            sensor.wallLeft.SwitchCostume("vertical");
+            sensor.wallRight.SwitchCostume("vertical");
 
         } else if (mydirection == 3) {
-            sensor.front.SetLocation(this.X, this.Y + 2);
-            sensor.right.SetLocation(this.X - 1, this.Y );
-            sensor.left.SetLocation(this.X + 2, this.Y );
-            sensor.front.SwitchCostume("length");
-            sensor.left.SwitchCostume("length");
-            sensor.right.SwitchCostume("length");
+            sensor.wallFront.SetLocation(this.X, this.Y + 2);
+            sensor.wallRight.SetLocation(this.X - 1, this.Y );
+            sensor.wallLeft.SetLocation(this.X + 2, this.Y );
+            sensor.playerFront.SetLocation(this.X, this.Y + 2);
+            sensor.wallFront.SwitchCostume("length");
+            sensor.wallLeft.SwitchCostume("length");
+            sensor.wallRight.SwitchCostume("length");
 
         } else if (mydirection == 4) {
-            sensor.front.SetLocation(this.X - 1, this.Y);
-            sensor.right.SetLocation(this.X, this.Y - 1);
-            sensor.left.SetLocation(this.X, this.Y + 2);
-            sensor.front.SwitchCostume("vertical");
-            sensor.left.SwitchCostume("vertical");
-            sensor.right.SwitchCostume("vertical");
+            sensor.wallFront.SetLocation(this.X - 1, this.Y);
+            sensor.wallRight.SetLocation(this.X, this.Y - 1);
+            sensor.wallLeft.SetLocation(this.X, this.Y + 2);
+            sensor.playerFront.SetLocation(this.X - 2, this.Y);
+            sensor.wallFront.SwitchCostume("vertical");
+            sensor.wallLeft.SwitchCostume("vertical");
+            sensor.wallRight.SwitchCostume("vertical");
         } else {
             throw new IllegalArgumentException(this.getClass().getName() + "mydirectionが不正です．");
         }
-        sensor.front.ChangeDrawingOrder(0);
-        sensor.right.ChangeDrawingOrder(0);
-        sensor.left.ChangeDrawingOrder(0);
+        sensor.wallFront.ChangeDrawingOrder(0);
+        sensor.wallRight.ChangeDrawingOrder(0);
+        sensor.wallLeft.ChangeDrawingOrder(0);
+        sensor.playerFront.ChangeDrawingOrder(0);
     }
 
     private void goAhead() {
-
+        sensor.playerFront.SwitchCostume("def");
         if (mydirection == 1) {
             MoveLocation(0, -1);
             SwitchCostume("Up");
         } else if (mydirection == 2) {
             MoveLocation(1, 0);
-            SwitchCostume("Right");
+            SwitchCostume("wallRight");
         } else if (mydirection == 3) {
             MoveLocation(0, 1);
             SwitchCostume("Down");
         } else if (mydirection == 4) {
             MoveLocation(-1, 0);
-            SwitchCostume("Left");
+            SwitchCostume("wallLeft");
         } else {
             throw new IllegalArgumentException(this.getClass().getName() + "mydirectionが不正です．");
         }
@@ -171,11 +185,7 @@ public class Enemy extends CObject {
 
     }
 
-    /**
-     * 敵を１コマ分動かす
-     */
-    public void Update() {
-        if(!debugisruninng)return;
+    private void moveAction(){
         Random rand = new Random();
         if (rand.nextInt(threshold2) == 0) { // 確率で後ろに向く
             TurnRight();
@@ -183,35 +193,35 @@ public class Enemy extends CObject {
         }
         // StringService str = new StringService(manager.master.view, "*", X+1, Y+1, CColor.RED, CColor.DEFAULT, true); // FIXME: デバッグ用のため削除
         setSensor();
-        boolean canMoveFront = !(sensor.front.IsHit(manager.map, '＃', sensor.front.GetCostumeData().get(0).get(0).word)
-                || sensor.front.IsHit(manager.map, '＠', sensor.front.GetCostumeData().get(0).get(0).word));
-        boolean canTrunRight = !(sensor.right.IsHit(manager.map, '＃', sensor.front.GetCostumeData().get(0).get(0).word)
-                || sensor.right.IsHit(manager.map, '＠', sensor.front.GetCostumeData().get(0).get(0).word));
-        boolean canTrunLeft = !(sensor.left.IsHit(manager.map, '＃', sensor.front.GetCostumeData().get(0).get(0).word)
-                     || sensor.left.IsHit(manager.map, '＠', sensor.front.GetCostumeData().get(0).get(0).word));
+        boolean canMovewallFront = !(sensor.wallFront.IsHit(manager.map, '＃', sensor.wallFront.GetCostumeData().get(0).get(0).word)
+                || sensor.wallFront.IsHit(manager.map, '＠', sensor.wallFront.GetCostumeData().get(0).get(0).word));
+        boolean canTrunwallRight = !(sensor.wallRight.IsHit(manager.map, '＃', sensor.wallFront.GetCostumeData().get(0).get(0).word)
+                || sensor.wallRight.IsHit(manager.map, '＠', sensor.wallFront.GetCostumeData().get(0).get(0).word));
+        boolean canTrunwallLeft = !(sensor.wallLeft.IsHit(manager.map, '＃', sensor.wallFront.GetCostumeData().get(0).get(0).word)
+                     || sensor.wallLeft.IsHit(manager.map, '＠', sensor.wallFront.GetCostumeData().get(0).get(0).word));
 
 
 
-        if (canMoveFront) { // 前に進めるなら
-            if ((canTrunRight || canTrunLeft) && rand.nextInt(threshold1) == 0) { // 左右に曲がれるかを判定
-                if (rand.nextBoolean() && canTrunRight) { // 確率で右に曲がる
+        if (canMovewallFront) { // 前に進めるなら
+            if ((canTrunwallRight || canTrunwallLeft) && rand.nextInt(threshold1) == 0) { // 左右に曲がれるかを判定
+                if (rand.nextBoolean() && canTrunwallRight) { // 確率で右に曲がる
                     TurnRight();
-                } else if (canTrunLeft) { // 確立に負けたら左
+                } else if (canTrunwallLeft) { // 確立に負けたら左
                     TurnLeft();
                 } else { // 左に行けなければしょうがないので右
                     TurnRight();
                 }
             }
         } else {
-            if (canTrunRight && canTrunLeft) { // 左右に曲がれるなら
+            if (canTrunwallRight && canTrunwallLeft) { // 左右に曲がれるなら
                 if (rand.nextBoolean()) { // 確率で右に曲がる
                     TurnRight();
                 } else {
                     TurnLeft();
                 }
-            } else if (canTrunRight) { // 右に曲がれるなら
+            } else if (canTrunwallRight) { // 右に曲がれるなら
                 TurnRight();
-            } else if (canTrunLeft) { // 左に曲がれるなら
+            } else if (canTrunwallLeft) { // 左に曲がれるなら
                 TurnLeft();
             } else { // どっちも曲がれないなら下がる
                 TurnRight();
@@ -220,7 +230,32 @@ public class Enemy extends CObject {
         }
         goAhead();
         setSensor();
+    }
+
+    private void playerHitAction(){
+        if(sensor.playerFront.IsHit(manager.player, 'Ｐ', sensor.playerFront.GetCostumeData().get(0).get(0).word)){
+            manager.player.isDamage = true;
+            isPlay = false;
+        }
+    }
+    private void lighting(){
+        sensor.playerFront.SwitchCostume("light");
+    }
+
+    /**
+     * 敵を１コマ分動かす
+     */
+    public void Update() {
+        if(!debugisruninng)return;
+        if(isPlay){
+            moveAction();
+            playerHitAction();
+
+        }else{
+            lighting();
+        }
         if(debugstatus)manager.master.debug.AddLog("X:" + X + " Y:" + Y);
+        
     }
 
 }

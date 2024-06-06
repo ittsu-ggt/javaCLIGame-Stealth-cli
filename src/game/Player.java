@@ -1,11 +1,16 @@
 package game;
 
+import org.junit.platform.engine.support.discovery.SelectorResolver.Resolution;
+
 import consolegui.*;
 import master.*;
 
 public class Player extends CObject {
     KeyBoardService key;
     GameScene manager;
+    public int hp = 3;
+    public boolean isDamage = false;
+
 
     /**
      * プレイヤーのコンストラクター
@@ -32,10 +37,7 @@ public class Player extends CObject {
         this.manager = manager;
     }
 
-    /**
-     * プレイヤーの更新処理
-     */
-    public void Update() {
+    private void keyAciton(){
         int vx = 0, vy = 0;
         if (key.isKeyPressed('w')) {
             vx = 0;
@@ -65,7 +67,9 @@ public class Player extends CObject {
             MoveLocation(-vx, -vy);
             SwitchCostume("def");
         }
+    }
 
+    private void setDisplayLocation(){
         int x = manager.player.X - manager.master.view.getWidth() / 2;
         if (manager.player.X < manager.master.view.getWidth() / 2)
             x = 0;
@@ -77,6 +81,46 @@ public class Player extends CObject {
         if (manager.player.Y > manager.map.GetCostumeData().size() - manager.master.view.getHeight() / 2)
             y = manager.map.GetCostumeData().size() - manager.master.view.getHeight();
         manager.master.view.SetLocation(x, y);
+    }
+
+    private int responDistance(Respon r){
+        return Math.abs(r.X - X) + Math.abs(r.Y - Y);
+    }
+
+    private void responAction(){
+        // 最も近いresponを求める
+        Respon nearRespon = manager.respons.get(0);
+        SwitchCostume("def");
+        for (Respon r : manager.respons) {
+            if (responDistance(r) < responDistance(nearRespon)) {
+                nearRespon = r;
+            }
+        }
+        if(nearRespon.X-1 == X && nearRespon.Y-1 == Y){
+            isDamage = false;
+            hp--;
+            for(Enemy e : manager.enemies){
+                e.isPlay = true;
+            }
+        }else if(nearRespon.X-1 < X){
+            MoveLocation(-1, 0);
+        }else if(nearRespon.X-1 > X){
+            MoveLocation(1, 0);
+        }else if(nearRespon.Y-1 < Y){
+            MoveLocation(0, -1);
+        }else if(nearRespon.Y-1 > Y){
+            MoveLocation(0, 1);
+        }
+    }
+
+    /**
+     * プレイヤーの更新処理
+     */
+    public void Update() {
+        if(isDamage)responAction();
+        else keyAciton();
+
+        setDisplayLocation();
 
     }
 }

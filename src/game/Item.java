@@ -23,9 +23,22 @@ public class Item extends CObject {
         this(manager, 0, 0, isvisible);
         Random rand = new Random();
         this.SetLocation(rand.nextInt(manager.map.GetCostumeData().get(0).size()-2)+1, rand.nextInt(manager.map.GetCostumeData().size()-2)+1);
-        while (IsHit(manager.map,'＃') || IsHit(manager.map,'＠')) {
+        boolean flag = true;
+        int count = 0;
+        while (count<100 || IsHit(manager.map,'＃') || IsHit(manager.map,'＠')) {
             this.SetLocation(rand.nextInt(manager.map.GetCostumeData().get(0).size()-2)+1, rand.nextInt(manager.map.GetCostumeData().size()-2)+1);
-        }
+            if(!(IsHit(manager.map,'＃') || IsHit(manager.map,'＠'))){
+                flag = false;
+                if(manager.items.size() > 0){
+                    for(Item it:manager.items){
+                        if(Math.abs(it.X - this.X) + Math.abs(it.Y - this.Y) <25){
+                            flag = true;
+                        }
+                    }
+                }
+            }
+            count++;
+        } // 万が一、条件に合致しない状態が100回続いた場合、強制的に配置する
         
     }
 
