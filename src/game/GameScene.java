@@ -22,6 +22,7 @@ public class GameScene {
     StatusLog statuslog;
     String time;
     int score = 0;
+    int item_num = 0;
 
     /**
      * ゲームの管理モジュール
@@ -57,6 +58,7 @@ public class GameScene {
         for (int i = 0; i < 15; i++) {
             this.items.add(new Item(this, true));
         }
+        this.item_num = items.size();
 
         this.respons.add(new Respon(this, 7, 10));
         this.respons.add(new Respon(this, 55, 97));
@@ -116,7 +118,7 @@ public class GameScene {
             throw new RuntimeException(
                     "GameScene : ゲーム終了条件に問題が発生しました\nplayer.hp = " + player.hp + "\nitems.size() = " + items.size());
         }
-        result = new Result(result_flag, score,items.size() ,(end.getTime() - gamestart.getTime()) / 1000);
+        result = new Result(result_flag, score,item_num-items.size() ,(end.getTime() - gamestart.getTime()) / 1000);
         CObject result_text;
         ArrayList<ArrayList<DrawCell>> result_text_costume;
         if (result.isClear) {
