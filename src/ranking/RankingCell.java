@@ -1,3 +1,5 @@
+package ranking;
+
 public class RankingCell {
     private int score;
     private long time;

@@ -5,7 +5,7 @@ import java.util.Collection;
 public class RankingManager {
     private static final String FILE_NAME = "./data/ranking/ranking.txt";
 
-    public static ArrayList<Integer> DataRoad(){
+    public static ArrayList<Integer> DataRoad() {
         List<String> lines = FileReader(FILE_NAME);
         ArrayList<Integer> data = new ArrayList<Integer>();
         for (String line : lines) {
@@ -14,19 +14,25 @@ public class RankingManager {
         return DataSort(data);
     }
 
-    public static boolean DataSave(int data){
+    public static boolean DataSave(int data) {
         List<Integer> lines = DataRoad();
+        Collections.sort(lines);
+        for(int i=0;i<5;i++){
+            if(lines.get(i)<=data){
+                return true;
+            }
+        }
         lines.add(data);
         // 上から５つを残す
-        Collections.sort(lines);
-        if(lines.size() > 5){
+        if (lines.size() > 5) {
             lines.remove(5);
         }
-        FileWriter(FILE_NAME, DataSort(lines));
+        Collections.sort(lines);
+        FileWriter(FILE_NAME, lines);
         return;
     }
 
-    private static ArrayList<Integer> DataSort(Array<Integer> data){
+    private static ArrayList<Integer> DataSort(Array<Integer> data) {
         Collections.sort(data);
     }
 
@@ -56,5 +62,4 @@ public class RankingManager {
         }
     }
 
-    
 }
