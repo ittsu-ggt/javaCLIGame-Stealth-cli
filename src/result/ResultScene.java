@@ -26,7 +26,7 @@ public class ResultScene {
                 master.view.getCameraY() + 24, CColor.WHITE, CColor.BLACK, true);
         time = new StringService(master.view, "タイム:" + sdf.format(result.time),
                 master.view.getCameraX() + 45, master.view.getCameraY() + 25, CColor.WHITE, CColor.BLACK, true);
-        collectionNum = new StringService(master.view, "集められた個数:" + result.num,
+        collectionNum = new StringService(master.view, "スコア:" + result.score,
                 master.view.getCameraX() + 45, master.view.getCameraY() + 26, CColor.WHITE, CColor.BLACK, true);
 
         button1 = new StringService(master.view, "スペースキーでタイトルに戻る", master.view.getCameraX() + 45,
