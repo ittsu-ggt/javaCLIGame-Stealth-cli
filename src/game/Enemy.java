@@ -16,6 +16,7 @@ public class Enemy extends CObject {
     boolean debugstatus = false;
     boolean debugisruninng = true;
     boolean isPlay = true;
+    boolean ismove = true;
 
     private class Enemysensor {
         CObject wallFront;
@@ -246,9 +247,15 @@ public class Enemy extends CObject {
      * 敵を１コマ分動かす
      */
     public void Update() {
+
         if(!debugisruninng)return;
         if(isPlay){
-            moveAction();
+            if(ismove){
+                ismove = false;
+                moveAction();
+            }else{
+                ismove = true;
+            }
             playerHitAction();
 
         }else{
