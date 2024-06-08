@@ -15,12 +15,15 @@ bgcolor_file = './mapbgcolor.txt'
 fg_replacement_table = {
     '　': '8',
     'Ｒ': '8',
+    '＄': '8',
     '＠': '8',
+    '＃': '1',
     '＃': '1',
 }
 bg_replacement_table = {
     '　': '8',
     'Ｒ': '7',
+    '＄': '8',
     '＠': '8',
     '＃': '1',
 }
