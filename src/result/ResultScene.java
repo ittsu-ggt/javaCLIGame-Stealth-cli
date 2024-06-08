@@ -14,6 +14,7 @@ public class ResultScene {
     StringService title ;
     StringService time;
     StringService collectionNum;
+    StringService newrecord;
     StringService button1;
 
     public ResultScene(Game master, Result result) {
@@ -26,9 +27,10 @@ public class ResultScene {
                 master.view.getCameraY() + 24, CColor.WHITE, CColor.BLACK, true);
         time = new StringService(master.view, "タイム:" + sdf.format(result.time),
                 master.view.getCameraX() + 45, master.view.getCameraY() + 25, CColor.WHITE, CColor.BLACK, true);
-        collectionNum = new StringService(master.view, "スコア:" + result.score,
+        collectionNum = new StringService(master.view, "スコア:" + result.rankingCell.getScore(),
                 master.view.getCameraX() + 45, master.view.getCameraY() + 26, CColor.WHITE, CColor.BLACK, true);
-
+        newrecord = new StringService(master.view, "ランキング更新！！", master.view.getCameraX() + 45,
+                master.view.getCameraY() + 27, CColor.WHITE, CColor.BLACK, true);
         button1 = new StringService(master.view, "スペースキーでタイトルに戻る", master.view.getCameraX() + 45,
                 master.view.getCameraY() + 35, CColor.WHITE, CColor.BLACK, true);
         
@@ -84,11 +86,13 @@ public class ResultScene {
         title.RemoveMe();
         time.RemoveMe();
         collectionNum.RemoveMe();
+        newrecord.RemoveMe();
         button1.RemoveMe();
         result_text = null;
         title = null;
         time = null;
         collectionNum = null;
+        newrecord = null;
         button1 = null;
         
     }
