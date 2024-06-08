@@ -39,22 +39,22 @@ public class Player extends CObject {
 
     private void keyAciton(){
         int vx = 0, vy = 0;
-        if (key.isKeyPressed('w')) {
+        if (key.isKeyPressed('w') || key.isKeyPressed('↑')) {
             vx = 0;
             vy = -1;
             SwitchCostume("Up");
         }
-        if (key.isKeyPressed('s')) {
+        if (key.isKeyPressed('s') || key.isKeyPressed('↓')) {
             vx = 0;
             vy = 1;
             SwitchCostume("Down");
         }
-        if (key.isKeyPressed('a')) {
+        if (key.isKeyPressed('a') || key.isKeyPressed('←')) {
             vx = -1;
             vy = 0;
             SwitchCostume("Left");
         }
-        if (key.isKeyPressed('d')) {
+        if (key.isKeyPressed('d') || key.isKeyPressed('→')) {
             vx = 1;
             vy = 0;
             SwitchCostume("Right");
