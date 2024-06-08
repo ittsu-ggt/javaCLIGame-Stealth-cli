@@ -33,6 +33,7 @@ public class RankingScene {
             manager.master.view.Update();
             sleep(100);
         }
+        destroy();
     }
 
     private void sleep(int time){
@@ -44,7 +45,12 @@ public class RankingScene {
     }
 
     public void destroy(){
-        
+        subtitle.RemoveMe();
+        for(StringService text : rankingText){
+            text.RemoveMe();
+        }
+        subtitle = null;
+        rankingText = null;
     }
 
 
