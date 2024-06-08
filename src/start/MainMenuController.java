@@ -35,14 +35,14 @@ public class MainMenuController {
                 break;
             }
             else if(select == 1){
-                this.rankingScene = new RankingScene(this);
-                rankingScene.run();
-                rankingScene = null;
+                // this.rankingScene = new RankingScene(this);
+                // rankingScene.run();
+                // rankingScene = null;
             }
             else if(select == 2){
-                this.howToPlayScene = new HowToPlayScene(this);
-                howToPlayScene.run();
-                howToPlayScene = null;
+                // this.howToPlayScene = new HowToPlayScene(this);
+                // howToPlayScene.run();
+                // howToPlayScene = null;
             }
             else if(select == 3){
                 isEnd = true;
