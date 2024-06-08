@@ -265,4 +265,17 @@ public class Enemy extends CObject {
         
     }
 
+    @Override
+    public void RemoveMe(){
+        sensor.wallFront.RemoveMe();
+        sensor.wallRight.RemoveMe();
+        sensor.wallLeft.RemoveMe();
+        sensor.playerFront.RemoveMe();
+        sensor.wallFront = null;
+        sensor.wallRight = null;
+        sensor.wallLeft = null;
+        sensor = null;
+        super.RemoveMe();
+    }
+
 }
