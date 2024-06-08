@@ -3,7 +3,7 @@
         "**/src/**/*.class": true
     },
     "java.test.config": {
-        "workingDirectory": "${workspaceFolder}/src/"
+        "workingDirectory": "${workspaceFolder}/bin/"
     },
     "java.project.sourcePaths": ["src","test"],
     "java.project.outputPath": "bin",

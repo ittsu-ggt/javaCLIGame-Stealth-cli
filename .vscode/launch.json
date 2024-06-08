@@ -16,7 +16,7 @@
             "request": "launch",
             "mainClass": "App",
             "projectName": "T22CS044-cli",
-            "cwd": "${workspaceFolder}/src/"
+            "cwd": "${workspaceFolder}/bin/"
         }
     ]
 }
