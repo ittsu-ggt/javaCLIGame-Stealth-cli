@@ -23,6 +23,7 @@ public class ResultScene {
     }
 
     public void run() {
+        master.view.SetLocation(0, 0);
         title = new StringService(master.view, "結果", master.view.getCameraX() + 45,
                 master.view.getCameraY() + 24, CColor.WHITE, CColor.BLACK, true);
         time = new StringService(master.view, "タイム:" + sdf.format(result.time),
