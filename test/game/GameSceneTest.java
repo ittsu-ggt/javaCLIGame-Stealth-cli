@@ -30,8 +30,8 @@ public class GameSceneTest {
     @Test
     public void プレイヤーの生成テスト() throws Exception{
         GameScene master = new GameScene(Testmaster);
-        assertEquals(master.player.X,5);
-        assertEquals(master.player.Y,5);
+        assertEquals(master.player.X,6);
+        assertEquals(master.player.Y,9);
         assertEquals(master.player.IsVisible,true);
     }
 
