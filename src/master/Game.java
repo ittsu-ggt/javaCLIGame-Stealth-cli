@@ -4,6 +4,7 @@ import java.io.IOException;
 import consolegui.*;
 import game.*;
 import result.*;
+import start.*;
 
 public class Game {
 
@@ -24,11 +25,21 @@ public class Game {
      * アプリケーションの実行
      */
     public void run() throws InterruptedException, IOException {
-        // GameScene master = new GameScene(this);
-        // Result gameresult = master.run();
-        Result gameresult = new Result(true, 100,15,100);
-        ResultScene result = new ResultScene(this, gameresult);
-        result.run();
+        while(true){
+            MainMenuController mainmenu = new MainMenuController(this);
+            boolean wantToExit = mainmenu.run();
+            if (wantToExit) {
+                break;
+            }
+            GameScene master = new GameScene(this);
+            Result gameresult = master.run();
+            // Result gameresult = new Result(true, 100,15,100);
+            ResultScene result = new ResultScene(this, gameresult);
+            result.run();
+        }
+        ExitDisplay exit = new ExitDisplay(this);
+        exit.run();
+        key.RemoveMe();
 
     }
 }
