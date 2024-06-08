@@ -67,6 +67,12 @@ public class Player extends CObject {
             MoveLocation(-vx, -vy);
             SwitchCostume("def");
         }
+        if(IsHit(manager.warp1)){
+            SetLocation(manager.warp2.X+2, manager.warp2.Y-5); //下側
+        }
+        if(IsHit(manager.warp2)){
+            SetLocation(manager.warp1.X+2, manager.warp1.Y+5); //上側
+        }
     }
 
     private void setDisplayLocation(){

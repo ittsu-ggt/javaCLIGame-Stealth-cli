@@ -12,6 +12,8 @@ public class GameScene {
     Game master;
     Player player;
     Map map;
+    Warp warp1;
+    Warp warp2;
     ArrayList<Enemy> enemies;
     ArrayList<Item> items;
     ArrayList<Respon> respons;
@@ -36,6 +38,8 @@ public class GameScene {
         this.enemies = new ArrayList<Enemy>();
         this.items = new ArrayList<Item>();
         this.respons = new ArrayList<Respon>();
+        this.warp1 = new Warp(this,78,7) ;
+        this.warp2 = new Warp(this,63,102) ;
 
         this.enemies.add(new Enemy(this, 21, 10, 15, 100, true, false)); // 左上1
         this.enemies.add(new Enemy(this, 16, 33, 8, 100, true, false)); // 左上2
@@ -62,6 +66,7 @@ public class GameScene {
         this.respons.add(new Respon(this, 58, 40));
         this.respons.add(new Respon(this, 91, 13));
         this.respons.add(new Respon(this, 139, 100));
+
 
     }
 
@@ -96,12 +101,14 @@ public class GameScene {
                 var now = new Timestamp(System.currentTimeMillis());
                 time = sdf.format(now.getTime() - gamestart.getTime());
                 statuslog.refresh(player.hp, time);
+                warp1.ChangeDrawingOrder(-1);
+                warp2.ChangeDrawingOrder(-1);
                 master.debug.Update();
                 master.view.Update();
 
                 Thread.sleep(50);
             } catch (Exception e) {
-                master.debug.AddLog(e.getMessage());// FIXME: デバッグ用のため削除
+                throw e;
             }
         }
         var end = new Timestamp(System.currentTimeMillis());
