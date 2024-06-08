@@ -8,10 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import consolegui.CColor;
-import consolegui.CObject;
-import consolegui.StringService;
-
 public class GameScene {
     Game master;
     Player player;
@@ -78,6 +74,7 @@ public class GameScene {
     public Result run() throws InterruptedException, IOException {
         Timestamp gamestart = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+        master.view.SetLocation(0, 0);
 
         while (player.hp > 0 && items.size() > 0) {
             try {
@@ -164,5 +161,6 @@ public class GameScene {
         items=null;
         respons=null;
         statuslog=null;
+        master.view.SetLocation(0, 0);
     }
 }
