@@ -5,18 +5,18 @@ import java.util.Random;
 import consolegui.*;
 
 public class Enemy extends CObject {
-    GameScene manager;
-    Enemysensor sensor;
+    private GameScene manager;
+    private Enemysensor sensor;
     // 1:上 2:右 3:下 4:左
-    int mydirection = 1;
+    private int mydirection = 1;
 
-    int threshold1;
-    int threshold2;
+    private int threshold1;
+    private int threshold2;
 
-    boolean debugstatus = false;
-    boolean debugisruninng = true;
+    private boolean debugstatus = false;
+    private boolean debugisruninng = true;
     boolean isPlay = true;
-    boolean ismove = true;
+    private boolean ismove = true; //移動タイミングをフレームごとに制御する
 
     private class Enemysensor {
         CObject wallFront;

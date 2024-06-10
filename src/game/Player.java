@@ -1,13 +1,11 @@
 package game;
 
-import org.junit.platform.engine.support.discovery.SelectorResolver.Resolution;
-
 import consolegui.*;
 import master.*;
 
 public class Player extends CObject {
-    KeyBoardService key;
-    GameScene manager;
+    private KeyBoardService key;
+    private GameScene manager;
     public int hp = 3;
     public boolean isDamage = false;
 

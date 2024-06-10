@@ -162,12 +162,16 @@ public class GameScene {
             respon.RemoveMe();
         }
         statuslog.RemoveMe();
+        warp1.RemoveMe();
+        warp2.RemoveMe();
         player=null;
         map=null;
         enemies=null;
         items=null;
         respons=null;
         statuslog=null;
+        warp1=null;
+        warp2=null;
         master.view.SetLocation(0, 0);
     }
 }

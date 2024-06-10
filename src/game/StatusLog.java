@@ -3,14 +3,14 @@ package game;
 import consolegui.*;
 
 public class StatusLog {
-    GameScene manager;
+    private GameScene manager;
 
-    CObject popup;
-    StringService title;
-    StringService time;
-    StringService hp;
-    StringService score;
-    StringService ItemCount;
+    private CObject popup;
+    private StringService title;
+    private StringService time;
+    private StringService hp;
+    private StringService score;
+    private StringService ItemCount;
 
     /**
      * ステータスログのコンストラクター
