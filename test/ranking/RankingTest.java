@@ -65,7 +65,9 @@ public class RankingTest {
     @Test
     public void RankingのDataSaveのテスト() throws Exception {
         RankingCell rankingCell = new RankingCell(120, 1000);
-        RankingManager.DataSave(rankingCell, "./testdata/ranking/testfile2.txt");
+        RankingCell rankingCell2 = new RankingCell(0, 0);
+        assertEquals(RankingManager.DataSave(rankingCell, "./testdata/ranking/testfile2.txt"), true);
+        assertEquals(RankingManager.DataSave(rankingCell2, "./testdata/ranking/testfile2.txt"), false);
         var r = RankingManager.DataRoad("./testdata/ranking/testfile2.txt");
         String ans = "500,10000\n" +
                         "200,800\n" +

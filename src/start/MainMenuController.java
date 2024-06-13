@@ -28,6 +28,7 @@ public class MainMenuController {
         boolean isEnd = false;
         while(true){
             this.mainScene = new MainScene(this);
+            master.key.bufferClear();
             int select = mainScene.run();
             mainScene = null;
             if(select == 0){
@@ -36,11 +37,13 @@ public class MainMenuController {
             }
             else if(select == 1){
                 this.rankingScene = new RankingScene(this);
+                master.key.bufferClear();
                 rankingScene.run();
                 rankingScene = null;
             }
             else if(select == 2){
                 // this.howToPlayScene = new HowToPlayScene(this);
+                // master.key.bufferClear();
                 // howToPlayScene.run();
                 // howToPlayScene = null;
             }

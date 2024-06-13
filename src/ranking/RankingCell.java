@@ -1,5 +1,7 @@
 package ranking;
 
+import java.text.SimpleDateFormat;
+
 public class RankingCell implements Comparable<RankingCell> {
     private int score;
     private long time;
@@ -18,7 +20,8 @@ public class RankingCell implements Comparable<RankingCell> {
     }
 
     public String toString() {
-        return score + "," + time;
+        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+        return score + "," + sdf.format(time);
     }
 
     @Override

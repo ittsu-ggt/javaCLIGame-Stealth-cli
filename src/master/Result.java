@@ -13,6 +13,6 @@ public class Result {
     public Result(boolean isClear, int score, int num, long time) {
         this.isClear = isClear;
         this.rankingCell = new RankingCell(score, num);
-        this.time = new Timestamp(time*1000);
+        this.time = new Timestamp(time);
     }
 }

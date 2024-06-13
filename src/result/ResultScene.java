@@ -2,6 +2,9 @@ package result;
 
 import consolegui.*;
 import master.*;
+import ranking.RankingCell;
+import ranking.RankingManager;
+
 import java.util.ArrayList;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -31,7 +34,7 @@ public class ResultScene {
         collectionNum = new StringService(master.view, "スコア:" + result.rankingCell.getScore(),
                 master.view.getCameraX() + 45, master.view.getCameraY() + 26, CColor.WHITE, CColor.BLACK, true);
         newrecord = new StringService(master.view, "ランキング更新！！", master.view.getCameraX() + 45,
-                master.view.getCameraY() + 27, CColor.WHITE, CColor.BLACK, true);
+                master.view.getCameraY() + 27, CColor.WHITE, CColor.BLACK, false);
         button1 = new StringService(master.view, "スペースキーでタイトルに戻る", master.view.getCameraX() + 45,
                 master.view.getCameraY() + 35, CColor.WHITE, CColor.BLACK, true);
         
@@ -49,10 +52,14 @@ public class ResultScene {
                 master.view.getCameraY() + 1,
                 true);
         result_text.ChangeDrawingOrder(-1);
-        int frame = -10;
-        Timestamp now = new Timestamp(System.currentTimeMillis());
+        int frame = 0;
+        if(RankingManager.DataSave(new RankingCell(result.rankingCell.getScore(), result.rankingCell.getTime()))) {
+            newrecord.SetVisible(true);
+        }
+        Timestamp start = new Timestamp(System.currentTimeMillis());
+        master.key.bufferClear();
         while (true) {
-            if(frame<0){
+            if((frame/10)%2==0){
                 button1.SetVisible(true);
             }else{
                 button1.SetVisible(false);
@@ -64,8 +71,8 @@ public class ResultScene {
             sleep(100);
             master.view.Update();
             frame++;
-            if(frame>10){
-                frame=-10;
+            if((new Timestamp(System.currentTimeMillis()).getTime() - start.getTime()) / 1000 >300){
+                break;
             }
         }
         sleep(1000);

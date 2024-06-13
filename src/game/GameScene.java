@@ -122,7 +122,7 @@ public class GameScene {
             throw new RuntimeException(
                     "GameScene : ゲーム終了条件に問題が発生しました\nplayer.hp = " + player.hp + "\nitems.size() = " + items.size());
         }
-        result = new Result(result_flag, score,item_num-items.size() ,(end.getTime() - gamestart.getTime()) / 1000);
+        result = new Result(result_flag, score,item_num-items.size() ,(end.getTime() - gamestart.getTime()));
         CObject result_text;
         ArrayList<ArrayList<DrawCell>> result_text_costume;
         if (result.isClear) {
@@ -132,7 +132,7 @@ public class GameScene {
             result_text_costume = SpriteBuildService.BuildModel("./data/costume/result_text/gameover.txt", CColor.RED,
                     CColor.RED);
         }
-        result_text = new CObject(master.view, result_text_costume, master.view.getCameraX(), master.view.getCameraY(),
+        result_text = new CObject(master.view, result_text_costume, master.view.getCameraX()+20, master.view.getCameraY()+1,
                 true);
         result_text.ChangeDrawingOrder(-1);
         for(int i=0;i<3;i++){
