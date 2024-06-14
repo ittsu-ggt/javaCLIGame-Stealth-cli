@@ -1,6 +1,5 @@
 package ranking;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
@@ -63,15 +62,10 @@ public class RankingManager {
         Collections.sort(table, Collections.reverseOrder());
         List<String> writeData = new ArrayList<String>();
         for (RankingCell line : table) {
-            writeData.add(line.toString());
+            writeData.add(line.getScore()+","+line.getTime());
         }
         FileWriter(FilePath, writeData);
         return RewriteRecord;
-    }
-
-    private static ArrayList<RankingCell> DataSort(ArrayList<RankingCell> data) {
-        Collections.sort(data);
-        return data;
     }
 
     private static void FileWriter(String FilePath, List<String> lines) {

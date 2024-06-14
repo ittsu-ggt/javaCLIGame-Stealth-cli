@@ -29,7 +29,7 @@ public class ResultScene {
         master.view.SetLocation(0, 0);
         title = new StringService(master.view, "結果", master.view.getCameraX() + 45,
                 master.view.getCameraY() + 24, CColor.WHITE, CColor.BLACK, true);
-        time = new StringService(master.view, "タイム:" + sdf.format(result.time),
+        time = new StringService(master.view, "タイム:" + sdf.format(result.rankingCell.getTime()),
                 master.view.getCameraX() + 45, master.view.getCameraY() + 25, CColor.WHITE, CColor.BLACK, true);
         collectionNum = new StringService(master.view, "スコア:" + result.rankingCell.getScore(),
                 master.view.getCameraX() + 45, master.view.getCameraY() + 26, CColor.WHITE, CColor.BLACK, true);
