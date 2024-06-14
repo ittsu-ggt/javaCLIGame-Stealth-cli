@@ -23,10 +23,10 @@ public class RankingTest {
     @Test
     public void RankingCellのtoStringテスト() throws Exception {
         int score = 100;
-        long time = 1000;
+        long time = 100000;
         RankingCell rankingCell = new RankingCell(score, time);
-        assertEquals("100,1000", rankingCell.toString());
-        assertEquals("100,1000", rankingCell+"");
+        assertEquals("100,01:40", rankingCell.toString());
+        assertEquals("100,01:40", rankingCell+"");
     }
 
     @Test
@@ -49,11 +49,11 @@ public class RankingTest {
     @Test 
     public void RankingのDataRoadのテスト() throws Exception {
         var r = RankingManager.DataRoad("./testdata/ranking/testfile1.txt");
-        String ans = "500,10000\n" +
-                        "200,800\n" +
-                        "200,950\n" +
-                        "150,1000\n" +
-                        "100,1000\n" ;
+        String ans = "500,01:40\n" +
+                        "200,01:20\n" +
+                        "200,01:35\n" +
+                        "150,01:40\n" +
+                        "100,01:40\n" ;
         String res = "";
         for (var i : r) {
             res += i.toString() + "\n";
@@ -64,16 +64,16 @@ public class RankingTest {
 
     @Test
     public void RankingのDataSaveのテスト() throws Exception {
-        RankingCell rankingCell = new RankingCell(120, 1000);
+        RankingCell rankingCell = new RankingCell(120, 120000);
         RankingCell rankingCell2 = new RankingCell(0, 0);
         assertEquals(RankingManager.DataSave(rankingCell, "./testdata/ranking/testfile2.txt"), true);
         assertEquals(RankingManager.DataSave(rankingCell2, "./testdata/ranking/testfile2.txt"), false);
         var r = RankingManager.DataRoad("./testdata/ranking/testfile2.txt");
-        String ans = "500,10000\n" +
-                        "200,800\n" +
-                        "200,950\n" +
-                        "150,1000\n" +
-                        "120,1000\n" ;
+        String ans = "500,01:40\n" +
+                        "200,01:20\n" +
+                        "200,01:35\n" +
+                        "150,01:40\n" +
+                        "120,02:00\n" ;
         String res = "";
         for (var i : r) {
             res += i.toString() + "\n";

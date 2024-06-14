@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 public class Result {
     public boolean isClear;
     public RankingCell rankingCell;
-    public Timestamp time;
+    public int num;
 
     public Result(boolean isClear, int score, int num, long time) {
         this.isClear = isClear;
-        this.rankingCell = new RankingCell(score, num);
-        this.time = new Timestamp(time);
+        this.rankingCell = new RankingCell(score, time);
+        this.num = num;
     }
 }
