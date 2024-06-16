@@ -12,11 +12,13 @@ public class RankingScene {
     public MainMenuController manager;
     public ArrayList<StringService> rankingText;
     public StringService subtitle;
+    public StringService quit;
 
     public RankingScene(MainMenuController manager){
         this.manager = manager;
         this.rankingText = new ArrayList<StringService>();
         this.subtitle = new StringService(manager.master.view, "順位,スコア ,タイム", 40, 20, CColor.BLACK, 0, true);
+        this.quit = new StringService(manager.master.view, "qキーで戻る", 40, 40, CColor.BLACK, 0, true);
 
     }
 
@@ -26,6 +28,7 @@ public class RankingScene {
         for(int i=0;i<ranking.size();i++){
             this.rankingText.add(new StringService(manager.master.view,(i+1)+"位,"+ ranking.get(i).toString(), 40, 22+i*2, CColor.BLACK, 0, true));
         }
+        quit.SetLocation(40, 22+ranking.size()*2+2);
         while(true){
             if(manager.master.key.isKeyPressed('q')){
                 break;
@@ -46,11 +49,13 @@ public class RankingScene {
 
     public void destroy(){
         subtitle.RemoveMe();
+        quit.RemoveMe();
         for(StringService text : rankingText){
             text.RemoveMe();
         }
         subtitle = null;
         rankingText = null;
+        quit = null;
     }
 
 
