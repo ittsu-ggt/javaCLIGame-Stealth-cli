@@ -42,10 +42,10 @@ public class MainMenuController {
                 rankingScene = null;
             }
             else if(select == 2){
-                // this.howToPlayScene = new HowToPlayScene(this);
-                // master.key.bufferClear();
-                // howToPlayScene.run();
-                // howToPlayScene = null;
+                this.howToPlayScene = new HowToPlayScene(this);
+                master.key.bufferClear();
+                howToPlayScene.run();
+                howToPlayScene = null;
             }
             else if(select == 3){
                 isEnd = true;
