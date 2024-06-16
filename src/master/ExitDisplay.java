@@ -9,10 +9,11 @@ public class ExitDisplay {
 
     public ExitDisplay(Game master){
         this.master = master;
-        this.stringService = new StringService(master.view,"ゲームを終了するには任意のキーを2回押してください",30,24,CColor.WHITE,CColor.BLACK,true);
+        this.stringService = new StringService(master.view,"ゲームを終了するには任意のキーを2回押してください",30,24,CColor.WHITE,CColor.BLACK,false);
     }
 
     public void run(){
+        this.stringService.IsVisible = true;
         master.view.Update();
     }
 

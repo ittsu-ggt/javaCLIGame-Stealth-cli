@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class GameScene {
     Game master;
@@ -18,7 +17,8 @@ public class GameScene {
     ArrayList<Item> items;
     ArrayList<Respon> respons;
     StatusLog statuslog;
-    String time;
+    long time;
+    String timeText;
     int score = 0;
     int item_num = 0;
 
@@ -78,6 +78,7 @@ public class GameScene {
      */
     public Result run() throws InterruptedException, IOException {
         Timestamp gamestart = new Timestamp(System.currentTimeMillis());
+        long Remaining_time = 10000;
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
         master.view.SetLocation(0, 0);
 
@@ -99,12 +100,16 @@ public class GameScene {
 
                 map.ChangeDrawingOrder(0);
                 var now = new Timestamp(System.currentTimeMillis());
-                time = sdf.format(now.getTime() - gamestart.getTime());
-                statuslog.refresh(player.hp, time);
+                time = Remaining_time - (now.getTime() - gamestart.getTime());
+                timeText = sdf.format(time+1000);
+                statuslog.refresh(player.hp, timeText);
                 warp1.ChangeDrawingOrder(-1);
                 warp2.ChangeDrawingOrder(-1);
                 master.debug.Update();
                 master.view.Update();
+                if(time<=0){
+                    break;
+                }
 
                 Thread.sleep(50);
             } catch (Exception e) {
@@ -118,6 +123,9 @@ public class GameScene {
             result_flag = false;
         } else if (items.size() <= 0) {
             result_flag = true;
+
+        }else if(time<=0){
+            result_flag = false;
         } else {
             throw new RuntimeException(
                     "GameScene : ゲーム終了条件に問題が発生しました\nplayer.hp = " + player.hp + "\nitems.size() = " + items.size());
