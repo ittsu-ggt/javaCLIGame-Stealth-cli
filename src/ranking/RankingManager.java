@@ -2,6 +2,9 @@ package ranking;
 
 import java.util.Collections;
 import java.util.List;
+
+import consolegui.SpriteBuildService;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,22 +14,37 @@ import master.*;
 
 public class RankingManager {
     private static Game master;
-    private static final String FILE_NAME = "./data/ranking/ranking.txt";
+    private static final String FILE_NAME = "../data/ranking/ranking.txt";
+    private static final int RANKING_MAX = 5;
 
     public static void SetMaster(Game master) {
         RankingManager.master = master;
     }
 
     public static ArrayList<RankingCell> DataRoad(String FilePath) {
-        Path File_Path = Path.of(FilePath);
+
+        Path File_Path = Path.of(RankingManager.class.getResource(FilePath).getPath());
         try{
             List<String> lines = Files.readAllLines(File_Path, StandardCharsets.UTF_8);
             ArrayList<RankingCell> data = new ArrayList<RankingCell>();
             for (String line : lines) {
-                String[] tmp = line.split(",");
-                int score = Integer.parseInt(tmp[0]);
-                long time = Long.parseLong(tmp[1]);
-                data.add(new RankingCell(score, time));
+                try{
+                    String[] tmp = line.split(",");
+                    int score = Integer.parseInt(tmp[0]);
+                    long time = Long.parseLong(tmp[1]);
+                    if(score < 0 || score> 1500 || time < 0 || time > 300000){
+                        data.add(new RankingCell(0, 0));
+                    }else{
+                    data.add(new RankingCell(score, time));
+                    }
+                }catch(Exception e){
+                    data.add(new RankingCell(0, 0));
+                }
+            }
+            if(data.size() < RANKING_MAX){
+                for(int i=data.size();i<RANKING_MAX;i++){
+                    data.add(new RankingCell(0,0));
+                }
             }
             return data;
         } catch (IOException e) {
@@ -44,11 +62,10 @@ public class RankingManager {
     }
 
     public static boolean DataSave(RankingCell data, String FilePath) {
-        Path File_Path = Path.of(FilePath);
         ArrayList<RankingCell> table = DataRoad(FilePath);
         Collections.sort(table, Collections.reverseOrder());
         boolean RewriteRecord = false;
-        for(int i=0;i<5;i++){
+        for(int i=0;i<RANKING_MAX;i++){
             if(table.get(i).compareTo(data)<=0){
                 RewriteRecord = true;
             }
@@ -56,8 +73,8 @@ public class RankingManager {
         table.add(data);
         Collections.sort(table, Collections.reverseOrder());
         // 上から５つを残す
-        if (table.size() > 5) {
-            table.remove(5);
+        if (table.size() > RANKING_MAX) {
+            table.remove(RANKING_MAX);
         }
         Collections.sort(table, Collections.reverseOrder());
         List<String> writeData = new ArrayList<String>();
@@ -69,7 +86,7 @@ public class RankingManager {
     }
 
     private static void FileWriter(String FilePath, List<String> lines) {
-        Path File_Path = Path.of(FilePath);
+        Path File_Path = Path.of(RankingManager.class.getResource(FilePath).getPath());
         try {
             Files.write(File_Path, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
