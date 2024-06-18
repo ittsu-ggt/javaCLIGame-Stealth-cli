@@ -41,11 +41,11 @@ public class ResultScene {
         ArrayList<ArrayList<DrawCell>> result_text_costume;
 
         if (result.isClear) {
-            result_text_costume = SpriteBuildService.BuildModel("./data/costume/result_text/gameclear.txt",
+            result_text_costume = SpriteBuildService.BuildModel("../data/costume/result_text/gameclear.txt",
                     CColor.WHITE,
                     CColor.WHITE);
         } else {
-            result_text_costume = SpriteBuildService.BuildModel("./data/costume/result_text/gameover.txt", CColor.WHITE,
+            result_text_costume = SpriteBuildService.BuildModel("../data/costume/result_text/gameover.txt", CColor.WHITE,
                     CColor.WHITE);
         }
         result_text = new CObject(master.view, result_text_costume, master.view.getCameraX() + 20,

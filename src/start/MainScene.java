@@ -22,7 +22,7 @@ public class MainScene {
         }
     }
     private class title{
-        public CObject logo = new CObject(manager.master.view,SpriteBuildService.BuildModel("./data/costume/title/ItemCollector.txt",CColor.CYAN,CColor.CYAN),10,3,true);
+        public CObject logo = new CObject(manager.master.view,SpriteBuildService.BuildModel("../data/costume/title/ItemCollector.txt",CColor.CYAN,CColor.CYAN),10,3,true);
         public int direction = -1;
         public int frame = 0;
         private void RemoveMe(){
