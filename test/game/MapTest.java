@@ -1,10 +1,6 @@
 package game;
 
 import org.junit.Test;
-
-import consolegui.CDebug;
-import consolegui.CDisplay;
-import consolegui.KeyBoardService;
 import master.Game;
 
 public class MapTest {
