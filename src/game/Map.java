@@ -13,9 +13,9 @@ public class Map extends CObject {
      */
     public Map(GameScene master) {
         super(master.master.view, "map",
-                SpriteBuildService.BuildModel("./data/costume/map/map.txt",
-                        "./data/costume/map/mapfgcolor.txt",
-                        "./data/costume/map/mapbgcolor.txt"),
+                SpriteBuildService.BuildModel("../data/costume/map/map.txt",
+                        "../data/costume/map/mapfgcolor.txt",
+                        "../data/costume/map/mapbgcolor.txt"),
                 0, 0, true);
         this.master = master;
     }

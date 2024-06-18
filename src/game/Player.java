@@ -20,16 +20,16 @@ public class Player extends CObject {
      */
     public Player(GameScene manager, int x, int y, boolean isvisible) {
         super(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/player/def.txt", CColor.GREEN, CColor.DEFAULT), x, y,
+                SpriteBuildService.BuildModel("../data/costume/player/def.txt", CColor.GREEN, CColor.DEFAULT), x, y,
                 isvisible);
         AddCostume("Left",
-                SpriteBuildService.BuildModel("./data/costume/player/left.txt", CColor.GREEN, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("../data/costume/player/left.txt", CColor.GREEN, CColor.DEFAULT));
         AddCostume("Right",
-                SpriteBuildService.BuildModel("./data/costume/player/right.txt", CColor.GREEN, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("../data/costume/player/right.txt", CColor.GREEN, CColor.DEFAULT));
         AddCostume("Up",
-                SpriteBuildService.BuildModel("./data/costume/player/upper.txt", CColor.GREEN, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("../data/costume/player/upper.txt", CColor.GREEN, CColor.DEFAULT));
         AddCostume("Down",
-                SpriteBuildService.BuildModel("./data/costume/player/lower.txt", CColor.GREEN, CColor.DEFAULT));
+                SpriteBuildService.BuildModel("../data/costume/player/lower.txt", CColor.GREEN, CColor.DEFAULT));
         SwitchCostume("def");
         this.key = manager.master.key;
         this.manager = manager;

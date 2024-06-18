@@ -12,7 +12,7 @@ public class Item extends CObject {
 
     public Item(GameScene manager, int x, int y, boolean isvisible){
         super(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/item/item.txt", CColor.BLACK, CColor.DEFAULT), x, y,
+                SpriteBuildService.BuildModel("../data/costume/item/item.txt", CColor.BLACK, CColor.DEFAULT), x, y,
                 isvisible);
         this.manager = manager;
         

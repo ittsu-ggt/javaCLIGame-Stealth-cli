@@ -49,53 +49,53 @@ public class Enemy extends CObject {
      */
     public Enemy(GameScene manager, int x, int y, int threshold1, int threshold2, boolean isvisible, boolean debugstatus) {
         super(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/enemy/def.txt", CColor.RED,
+                SpriteBuildService.BuildModel("../data/costume/enemy/def.txt", CColor.RED,
                         CColor.DEFAULT),
                 x, y,
                 isvisible);
         this.threshold1 = threshold1;
         this.threshold2 = threshold2;
         AddCostume("wallLeft",
-                SpriteBuildService.BuildModel("./data/costume/enemy/left.txt", CColor.RED,
+                SpriteBuildService.BuildModel("../data/costume/enemy/left.txt", CColor.RED,
                         CColor.DEFAULT));
         AddCostume("wallRight",
-                SpriteBuildService.BuildModel("./data/costume/enemy/right.txt", CColor.RED,
+                SpriteBuildService.BuildModel("../data/costume/enemy/right.txt", CColor.RED,
                         CColor.DEFAULT));
-        AddCostume("Up", SpriteBuildService.BuildModel("./data/costume/enemy/upper.txt", CColor.RED,
+        AddCostume("Up", SpriteBuildService.BuildModel("../data/costume/enemy/upper.txt", CColor.RED,
                 CColor.DEFAULT));
         AddCostume("Down",
-                SpriteBuildService.BuildModel("./data/costume/enemy/lower.txt", CColor.RED,
+                SpriteBuildService.BuildModel("../data/costume/enemy/lower.txt", CColor.RED,
                         CColor.DEFAULT));
         SwitchCostume("def");
         sensor = new Enemysensor();
         sensor.wallFront = new CObject(manager.master.view, "length",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
+                SpriteBuildService.BuildModel("../data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
                         CColor.RED),
                 this.X, this.Y, isvisible);
         sensor.wallRight = new CObject(manager.master.view, "length",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
+                SpriteBuildService.BuildModel("../data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
                         CColor.RED),
                 this.X, y, isvisible);
         sensor.wallLeft = new CObject(manager.master.view, "length",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
+                SpriteBuildService.BuildModel("../data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
                         CColor.RED),
                 this.X, y, isvisible);
         sensor.playerFront = new CObject(manager.master.view, "def",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorPlayer.txt", CColor.DEFAULT,
+                SpriteBuildService.BuildModel("../data/costume/enemy/sensorPlayer.txt", CColor.DEFAULT,
                         CColor.DEFAULT),
                 this.X, y, isvisible);
 
         sensor.wallFront.AddCostume("vertical",
-                SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
+                SpriteBuildService.BuildModel("../data/costume/enemy/sensorHitWall2.txt", CColor.DEFAULT,
                 CColor.RED));
         sensor.wallRight.AddCostume("vertical",
-        SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
+        SpriteBuildService.BuildModel("../data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
                 CColor.RED));
         sensor.wallLeft.AddCostume("vertical",
-        SpriteBuildService.BuildModel("./data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
+        SpriteBuildService.BuildModel("../data/costume/enemy/sensorHitWall1.txt", CColor.DEFAULT,
                 CColor.RED));
         sensor.playerFront.AddCostume("light",
-        SpriteBuildService.BuildModel("./data/costume/enemy/sensorPlayer2.txt", CColor.YELLOW,
+        SpriteBuildService.BuildModel("../data/costume/enemy/sensorPlayer2.txt", CColor.YELLOW,
                 CColor.YELLOW));
 
         this.manager = manager;

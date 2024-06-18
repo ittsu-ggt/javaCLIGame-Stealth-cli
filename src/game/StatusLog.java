@@ -20,9 +20,9 @@ public class StatusLog {
     public StatusLog(GameScene manager) {
         this.manager = manager;
         popup = new CObject(manager.master.view, "popup",
-                SpriteBuildService.BuildModel("./data/costume/statuslog/popup.txt",
-                        "./data/costume/statuslog/popupfgcolor.txt",
-                        "./data/costume/statuslog/popupbgcolor.txt"),
+                SpriteBuildService.BuildModel("../data/costume/statuslog/popup.txt",
+                        "../data/costume/statuslog/popupfgcolor.txt",
+                        "../data/costume/statuslog/popupbgcolor.txt"),
                 0, 0, false);
         title = new StringService(manager.master.view, "title", 0, 0, CColor.BLACK, CColor.WHITE, true);
         time = new StringService(manager.master.view, "00:00", 0, 0, CColor.BLACK, CColor.WHITE, true);
