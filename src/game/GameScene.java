@@ -31,7 +31,7 @@ public class GameScene {
      */
     public GameScene(Game master) throws InterruptedException, IOException {
         this.master = master;
-        this.player = new Player(this, 6, 9, true);
+        this.player = new Player(this, 5, 8, true);
         this.map = new Map(this);
         this.statuslog = new StatusLog(this);
         this.map.SetVisible(true);
@@ -78,7 +78,7 @@ public class GameScene {
      */
     public Result run() throws InterruptedException, IOException {
         Timestamp gamestart = new Timestamp(System.currentTimeMillis());
-        long Remaining_time = 10000;
+        long Remaining_time = 300000;
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
         master.view.SetLocation(0, 0);
 
@@ -134,10 +134,10 @@ public class GameScene {
         CObject result_text;
         ArrayList<ArrayList<DrawCell>> result_text_costume;
         if (result.isClear) {
-            result_text_costume = SpriteBuildService.BuildModel("./data/costume/result_text/gameclear.txt", CColor.BLUE,
+            result_text_costume = SpriteBuildService.BuildModel("../data/costume/result_text/gameclear.txt", CColor.BLUE,
                     CColor.BLUE);
         } else {
-            result_text_costume = SpriteBuildService.BuildModel("./data/costume/result_text/gameover.txt", CColor.RED,
+            result_text_costume = SpriteBuildService.BuildModel("../data/costume/result_text/gameover.txt", CColor.RED,
                     CColor.RED);
         }
         result_text = new CObject(master.view, result_text_costume, master.view.getCameraX()+20, master.view.getCameraY()+1,
