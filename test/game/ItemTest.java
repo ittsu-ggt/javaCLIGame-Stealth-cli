@@ -1,5 +1,5 @@
 package game;
-
+import org.junit.Test;
 import master.Game;
 
 public class ItemTest {

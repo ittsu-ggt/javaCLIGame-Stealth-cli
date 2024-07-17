@@ -23,7 +23,7 @@ public class RankingManager {
 
     public static ArrayList<RankingCell> DataRoad(String FilePath) {
 
-        Path File_Path = Path.of(RankingManager.class.getResource(FilePath).getPath());
+        Path File_Path = Paths.get(RankingManager.class.getResource(FilePath).getPath());
         try{
             List<String> lines = Files.readAllLines(File_Path, StandardCharsets.UTF_8);
             ArrayList<RankingCell> data = new ArrayList<RankingCell>();
@@ -86,7 +86,7 @@ public class RankingManager {
     }
 
     private static void FileWriter(String FilePath, List<String> lines) {
-        Path File_Path = Path.of(RankingManager.class.getResource(FilePath).getPath());
+        Path File_Path = Paths.get(RankingManager.class.getResource(FilePath).getPath());
         try {
             Files.write(File_Path, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
